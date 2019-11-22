@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2019 at 07:54 AM
+-- Generation Time: Nov 22, 2019 at 10:25 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -102,13 +102,9 @@ CREATE TABLE `requests` (
 --
 
 INSERT INTO `requests` (`id`, `request_to`, `requestor`, `request_id`, `type_of_request`, `area_of_request`, `plant_designation`, `model`, `ln_bn`, `request_concern`, `route_to_supervisor`, `route_to_manager`, `attached_file`, `request_status`, `supervisor_approval`, `manager_approval`, `date_requested`) VALUES
-(26, 'PLANT MAINTENANCE', 1646, '1000', 'Breakdown, Repair, ', 'P4', 'PLANT 8/9/10', NULL, NULL, 'asdfasdf', 'DE SILVA, REGINO VICTOR  E.', 'VARIAS, PAULINO  F.', 'test_edit_1573709712.jpg', 'pending to manager', 1, NULL, '2019-11-14 05:35:12'),
-(27, 'PLANT MAINTENANCE', 1646, '1001', 'Setup and Pre-Qualification, ', 'P5 VCM ASSEMBLY', 'PLANT 7', NULL, NULL, 'asdfasdf', 'DE SILVA, REGINO VICTOR  E.', 'TORREVERDE, WILSON  E.', NULL, 'pending to manager', 1, NULL, '2019-11-14 05:35:27'),
-(28, 'PLANT MAINTENANCE', 1646, '1002', 'Breakdown, ', 'P7', 'PLANT 8/9/10', NULL, NULL, 'asdfasdfasdfasd', 'DE SILVA, REGINO VICTOR  E.', 'TORREVERDE, WILSON  E.', 'test_edit_1573709752.jpg', 'pending to manager', 1, NULL, '2019-11-14 05:35:52'),
-(29, 'PLANT MAINTENANCE', 1645, '1003', 'Repair, ', 'MIS', 'PLANT 8/9/10', NULL, NULL, 'Repair Broken extension', 'DE SILVA, REGINO VICTOR  E.', 'TORREVERDE, WILSON  E.', NULL, 'pending to manager', 1, NULL, '2019-11-14 06:03:13'),
-(30, 'PLANT MAINTENANCE', 1645, '1004', 'Repair, ', 'P5 VCM ASSEMBLY', 'PLANT 8/9/10', NULL, NULL, 'request to repair chair on MIS room', 'DE SILVA, REGINO VICTOR  E.', 'TORREVERDE, WILSON  E.', 'test_edit_1573711427.jpg', 'pending to manager', 1, NULL, '2019-11-14 06:03:47'),
-(31, 'EQUIPMENT ENGINEERING', 1645, '1005', 'Repair, ', 'P8', 'PLANT 8/9/10', NULL, NULL, 'asdfasdfads', 'DE SILVA, REGINO VICTOR  E.', 'GAMBOA, NEIL  Y.', NULL, 'pending to manager', 1, NULL, '2019-11-14 06:07:58'),
-(32, 'PLANT MAINTENANCE', 423, '1006', 'Repair, Lan cable', 'ADMIN', 'MAIN PLANT', NULL, NULL, 'Install', 'DE SILVA, REGINO VICTOR  E.', 'TORREVERDE, WILSON  E.', NULL, 'pending to supervisor', NULL, NULL, '2019-11-16 21:41:30');
+(43, 'EQUIPMENT ENGINEERING', 298, '1000', 'Repair, ', 'P8', 'PLANT 8/9/10', NULL, NULL, 'request to calibrate hot plate', 'NOT APPLICABLE', 'GAMBOA, NEIL  Y.', 'BARCODE_1574406887.xlsm', 'pending to manager', NULL, NULL, '2019-11-22 07:14:47'),
+(44, 'PLANT MAINTENANCE', 298, '1001', 'Improvement, ', 'P8', 'PLANT 8/9/10', NULL, NULL, 'request to install lan cable on MIS room for network expansion', 'NOT APPLICABLE', 'TORREVERDE, WILSON  E.', 'BARCODE_1574407154.xlsm', 'pending to manager', NULL, NULL, '2019-11-22 07:19:14'),
+(45, 'PLANT MAINTENANCE', 1646, '1002', 'Repair, ', 'P8', 'PLANT 8/9/10', NULL, NULL, 'Request to repair aircon on server room (leaking)', 'DE SILVA, REGINO VICTOR  E.', 'TORREVERDE, WILSON  E.', 'DAI-01_1574407578.pdf', 'pending to manager', 1, NULL, '2019-11-22 07:26:18');
 
 -- --------------------------------------------------------
 
@@ -185,7 +181,7 @@ INSERT INTO `users` (`id`, `username`, `name`, `password`, `date_hired`, `gender
 (42, '000389', 'OAPERINA, JONATHAN  S.', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'AUGUST 27, 2002', 'M', 'R', 'SMP', 'MAIN PLANT', 'EQUIPMENT ENGINEERING', 'P2 EQUIPMENT ENGG', 'SUPERVISOR', NULL, NULL, NULL, NULL, NULL),
 (43, '000398', 'MARANAN, BABYLYN  T.', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'SEPTEMBER 9, 2002', 'F', 'R', 'SMP', 'MAIN PLANT', 'QA', 'QA VCM AP', 'STAFF', NULL, NULL, NULL, NULL, NULL),
 (44, '000402', 'YANDAN, ANABELLE  D.', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'SEPTEMBER 14, 2002', 'F', 'R', 'SMP', 'MAIN PLANT', 'QA', 'QA INSPECTION', 'OPERATOR', NULL, NULL, NULL, NULL, NULL),
-(45, '000422', 'TORREVERDE, WILSON  E.', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'OCTOBER 2, 2002', 'M', 'R', 'SMP', 'MAIN PLANT', 'EQUIPMENT ENGINEERING', 'P1 EQUIPMENT ENGG', 'SR. SUPERVISOR', 3, NULL, NULL, NULL, NULL),
+(45, '000422', 'TORREVERDE, WILSON  E.', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'OCTOBER 2, 2002', 'M', 'R', 'SMP', 'MAIN PLANT', 'PLANT MAINTENANCE', 'P1 EQUIPMENT ENGG', 'SR. SUPERVISOR', 3, NULL, NULL, NULL, NULL),
 (46, '000425', 'VILLOTE, JERRY HILL  B.', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'OCTOBER 7, 2002', 'M', 'R', 'SMP', 'PLANT 8/9/10', 'P8', 'P8 MACHINING', 'SR. STAFF', NULL, NULL, NULL, NULL, NULL),
 (47, '000463', 'PELEJO JR., SILVESTRE  D.', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'JANUARY 13, 2003', 'M', 'R', 'SMP', 'MAIN PLANT', 'PLANT MAINTENANCE', 'PURE & WASTE WATER', 'ASST. STAFF', NULL, NULL, NULL, NULL, NULL),
 (48, '000470', 'PARCO, DARREL  C.', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'JANUARY 27, 2003', 'M', 'R', 'SMP', 'PLANT 8/9/10', 'P9', 'P9 MACHINING', 'ASST. STAFF', NULL, NULL, NULL, NULL, NULL),
@@ -1844,7 +1840,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `users`
