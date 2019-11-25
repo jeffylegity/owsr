@@ -51,15 +51,6 @@
                <li>
                   <a href="{{route('manager.approved')}}" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Approved Request(s) </span> </a>
                </li>
-               <hr>
-               <li class="has_sub">
-                  <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-float-none"></i><span>Request Form</span></a>
-                  <ul class="list-unstyled">
-                     {{-- <li><a href="{{route('manager.ee_req_form')}}">Equipment Engineering</a></li>
-                     <li><a href="{{route('manager.pm_req_form')}}">Plant Maintenance</a></li>
-                     <li><a href="{{route('manager.pe_req_form')}}">Process Engineering</a></li> --}}
-                  </ul>
-               </li>
             </ul>
             <div class="clearfix"></div>
          </div>

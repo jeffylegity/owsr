@@ -89,11 +89,9 @@
                     <label>*Process Area/Department</label>
                     <select name="area_of_request" id="area_of_request" class="form-control" required>
                       <option value="" disabled selected>--Department--</option>
-                        @if (is_array($get_all_department) || is_object($get_all_department))
                            @foreach ($get_all_department as $dept)
                            <option value="{{ $dept->department }}">{{ $dept->department }}</option>  
                            @endforeach
-                        @endif
                     </select>
                   </div>
                   <div class="col-md-6">
@@ -128,11 +126,9 @@
                      <label>*Route to Manager:</label>
                      <select name="route_to_manager" id="route_to_manager" class="form-control" required>
                         <option value="" disabled selected>--Manager--</option>
-                           @if (is_array($get_all_manager) || is_object($get_all_manager))
                               @foreach ($get_all_manager as $manager)
                               <option value="{{$manager->name}}">{{$manager->name}}</option>   
                               @endforeach
-                           @endif
                      </select>
                   </div>
               <div class="form-group">

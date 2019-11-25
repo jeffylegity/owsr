@@ -25,7 +25,7 @@ class ApproverFormController extends Controller
    $route_to_manager    = $request->input('route_to_manager');
    $request_status      = 'pending to manager';
    $date_requested      = now();
-   $req_limiter         = DB::table('requests')->select('*')->where(['requestor'=>$this->session_id,'request_status'=>'pending to manager'])->count();
+   $req_limiter         = DB::table('requests')->select('*')->where(['requestor'=>$this->session_id,])->whereIn('request_status',['pending','pending to manager'])->count();
    
    if ($request_to == 'EQUIPMENT ENGINEERING') {
 
