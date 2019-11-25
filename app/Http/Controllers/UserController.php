@@ -74,10 +74,4 @@ class UserController extends Controller
       return view('pages.user.forms.user_req_details')->with(['get_request_details'=>$get_req_details]);
    }
 
-   public function downloadAttachedFiles($filename)
-   {
-      $path = storage_path("app/public/attached_files/{$filename}");
-      return response()->download($path);
-   }
-
 }

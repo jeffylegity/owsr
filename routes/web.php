@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'MyCustomAuthController@authChecker');
+Route::get('download_attached-files/{filename}', 'DownloadController@downloadAttachedFiles')->name('download-attached-files');
 
 Auth::routes([
    'register' => false,
@@ -29,8 +30,8 @@ Route::group(['middleware' => ['is_admin']], function () {
 //route for dept. head
 Route::group(['middleware' => ['is_approver']], function () {
    Route::get('approver/home', 'HomeController@approverHome')->name('approver.home');
-   Route::get('approver/approved_requests/', 'ApproverController@approverApproved')->name('approver.approved');
    Route::get('approver/pending_for_approval','ApproverController@approverPendingForApproval')->name('approver.pending_for_approval');
+   Route::get('approver/approved_requests', 'ApproverController@approverApproved')->name('approver.approved');
    Route::get('approver/pending_request', 'ApproverController@approverPendingRequest')->name('approver.pending_request');
    Route::get('approver/completed_request', 'ApproverController@approverCompletedRequest')->name('approver.completed_request');
    Route::get('approver/ee_request_form', 'ApproverController@approverEEreqForm')->name('approver.ee_req_form');
@@ -45,6 +46,9 @@ Route::group(['middleware' => ['is_approver']], function () {
 //route for manager
 Route::group(['middleware' => ['is_manager']], function () {
    Route::get('manager/home', 'HomeController@managerHome')->name('manager.home');
+   Route::get('manager/pending_for_approval','ManagerController@managerPendingForApproval')->name('manager.pending_for_approval');
+   Route::get('manager/approved_requests', 'ManagerController@managerApproved')->name('manager.approved');
+   Route::get('manager/approve_request/{req_id}','ManagerController@approveRequest')->name('manager.approve_request');
    Route::get('manager/request_details/{req_id}', 'ManagerController@managerReqDetails')->name('manager.req_details');
 });
 
@@ -60,8 +64,6 @@ Route::group(['middleware' => ['is_user']], function () {
    Route::get('user/pe_request_form', 'UserController@userPEreqForm')->name('user.pe_req_form');
    Route::get('user/request_details/{req_id}', 'UserController@userReqDetails')->name('user.req_details');
    Route::post('user/submit_request_form', 'UserFormController@userSubmitReqForm')->name('user.submit_request_form');
-   Route::get('user/download_attached-files/{filename}', 'UserController@downloadAttachedFiles')->name('user.download-attached-files');
-   Route::get('user/test', 'UserController@test')->name('test');
 
 });
 

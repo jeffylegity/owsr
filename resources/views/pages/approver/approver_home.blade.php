@@ -31,7 +31,7 @@
                         </td>
                         <td>{{$request->request_id}}</td>
                         <td>{{$request->name}}</td>
-                        <td>{{$request->request_concern}}</td>
+                        <td title="{{$request->request_concern}}">{{Str::limit($request->request_concern)}}</td>
                         <td><span class="badge badge-danger">{{$request->request_status}}</span></td>
                         <td>{{ Carbon\Carbon::parse($request->date_requested)->diffForHumans()}}</td>
                      </tr>

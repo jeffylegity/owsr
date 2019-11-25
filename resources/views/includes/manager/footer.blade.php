@@ -36,6 +36,7 @@
  </div>
 </div>
 </div>
+<script src="{{URL::asset('assets/js/Chart.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/jquery.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/popper.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>

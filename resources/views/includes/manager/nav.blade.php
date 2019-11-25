@@ -43,8 +43,15 @@
          <div id="sidebar-menu">
             <ul>
                <li>
-                  <a href="{{route('manager.home')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Approval Request(s) </span> </a>
+                  <a href="{{route('manager.home')}}" class="waves-effect" ><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
                </li>
+               <li>
+                  <a href="{{route('manager.pending_for_approval')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Approval Request(s) </span> </a>
+               </li>
+               <li>
+                  <a href="{{route('manager.approved')}}" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Approved Request(s) </span> </a>
+               </li>
+               <hr>
                <li class="has_sub">
                   <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-float-none"></i><span>Request Form</span></a>
                   <ul class="list-unstyled">

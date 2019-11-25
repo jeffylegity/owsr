@@ -104,7 +104,7 @@
                 <button class="btn btn-danger" disabled><i class="fa fa-ban"></i> No attached file</button>
                 @else
                 
-                <a href="{{route('user.download-attached-files',$request->attached_file)}}" class="btn btn-secondary" target="_blank"><i class="fa fa-download"></i>  Download</a>&ensp;&ensp;
+                <a href="{{route('download-attached-files',$request->attached_file)}}" class="btn btn-secondary" target="_blank"><i class="fa fa-download"></i>  Download</a>&ensp;&ensp;
                 ({{$request->attached_file}})
                 @endif
               </div>
