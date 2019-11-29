@@ -87,7 +87,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <label>*Process Area/Department</label>
-                    <select name="area_of_request" id="area_of_request" class="form-control" required>
+                    <select name="area_of_request" id="area_of_request" class="form-control" value="{{old('area_of_request')}}" required>
                       <option value="" disabled selected>--Department--</option>
                            @foreach ($get_all_department as $dept)
                            <option value="{{ $dept->department }}">{{ $dept->department }}</option>  
@@ -96,7 +96,7 @@
                   </div>
                   <div class="col-md-6">
                     <label>*Plant Designation</label>
-                    <select name="plant_designation" id="plant_designation" class="form-control" required>
+                    <select name="plant_designation" id="plant_designation" class="form-control" value="{{old('plant_designation')}}" required>
                       <option value="" disabled selected>--Plant--</option>
                       <option value="MAIN PLANT">(Main) Plant 1/2/3/4</option>
                       <option value="PLANT 5">Plant 5</option>
@@ -120,7 +120,7 @@
               </div>
               <div class="form-group">
                 <label for="emailAddress">*Request</label>
-                <textarea name="request_concern" id="request_concern" rows="7" class="form-control" placeholder="Compose" required></textarea>
+                <textarea name="request_concern" id="request_concern" rows="7" class="form-control" placeholder="Compose" value="{{old('request_concern')}}" required></textarea>
               </div>
                   <div class="form-group">
                      <label>*Route to Manager:</label>
@@ -132,7 +132,7 @@
                      </select>
                   </div>
               <div class="form-group">
-                <label for="emailAddress">Attach file <p class="text-muted">(Supported files: docx, jpg, jpeg, png, pdf, xls, xlsm, xlsx)</p> </label>
+                <label for="emailAddress">Attach file <p style="color:red;">(Supported files: docx, jpg, jpeg, png, pdf, xls, xlsm, xlsx)</p> </label>
                 <input type="file" class="dropify" data-height="150" / name="attached_file">
               </div>
               <div class="form-group text-right m-b-0">

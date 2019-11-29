@@ -4,7 +4,7 @@ $(document).ready(function () {
   var table = $('#datatable-buttons').DataTable({
     buttons: ['copy', 'excel'],
     lengthChange: true,
-    bFilter: false,
+    bFilter: true,
 
   });
 

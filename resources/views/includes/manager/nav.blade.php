@@ -46,7 +46,11 @@
                   <a href="{{route('manager.home')}}" class="waves-effect" ><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
                </li>
                <li>
-                  <a href="{{route('manager.pending_for_approval')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Approval Request(s) </span> </a>
+                  <a href="{{route('manager.pending_for_approval')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Approval Request(s) </span> 
+                     @if (!$for_approval_counter == 0)
+                        <span class="badge badge-danger" style="float:right;">{{$for_approval_counter}}</span>  
+                     @endif
+                  </a>
                </li>
                <li>
                   <a href="{{route('manager.approved')}}" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Approved Request(s) </span> </a>

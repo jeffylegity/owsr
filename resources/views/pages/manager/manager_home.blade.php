@@ -11,12 +11,12 @@
                       <i class="mdi mdi-eye"></i>View
                   </a>
                 </div>
-                <h4 class="header-title mt-0 m-b-30">Pending Request(s)</h4>
+                <h4 class="header-title mt-0 m-b-30">Pending for Approval</h4>
                 <div class="widget-box-2">
                   <div class="widget-detail-2">
-                    <i class="mdi mdi-clock-alert mdi-48px" style="float:left;color:#ff5b5b;margin-top:-40px;"></i>
+                    <i class="mdi mdi-comment-alert-outline mdi-48px" style="float:left;color:#ff5b5b;margin-top:-40px;"></i>
                       <h2 class="mb-0">
-1
+                        {{$for_approval_counter}}
                       </h2>
                       <p class="text-muted m-b-25">as of today</p>
                   </div>
@@ -39,12 +39,20 @@
                       <a href="javascript:void(0);" class="dropdown-item">View</a>
                   </div>
                 </div>
-                <h4 class="header-title mt-0 m-b-30">Ongoing</h4>
+                <h4 class="header-title mt-0 m-b-30">Pending to
+                   @if (Auth::user()->department == 'PLANT MAINTENANCE')
+                       PM
+                   @elseif(Auth::user()->department == 'EQUIPMENT ENGINEERING')
+                       EE
+                   @elseif(Auth::user()->department == 'PROCESS ENGINEERING')
+                       PE
+                   @endif
+                </h4>
                 <div class="widget-box-2">
                   <div class="widget-detail-2">
                       <i class="mdi mdi-settings mdi-spin mdi-48px" style="float:left;color:#f9c851;margin-top:-40px;"></i>
                       <h2 class="mb-0">
-1
+                        {{$pending_counter}}
                       </h2>
                       <p class="text-muted m-b-25">as of today</p>
                   </div>
@@ -72,7 +80,7 @@
                   <div class="widget-detail-2">
                       <i class="mdi mdi-check-circle mdi-48px" style="float:left;color:#10c469;margin-top:-40px;"></i>
                       <h2 class="mb-0">
-1
+                        {{$completed_counter}}
                       </h2>
                       <p class="text-muted m-b-25">as of today</p>
                   </div>

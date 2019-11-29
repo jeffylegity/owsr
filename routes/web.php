@@ -24,6 +24,7 @@ Auth::routes([
 //route for admin
 Route::group(['middleware' => ['is_admin']], function () {
    Route::get('admin/home', 'HomeController@adminHome')->name('admin.home');
+   Route::get('admin/pending_requests', 'AdminController@adminPendingRequests')->name('admin.pending_requests');
 });
 
 //role == 2
