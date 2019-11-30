@@ -56,7 +56,7 @@ class ApproverFormController extends Controller
             $this->fileNameToStore    = $fileName.'_'.time().'.'.$getExt;
             $path                     = $request->file('attached_file')->storeAs('public/attached_files', $this->fileNameToStore);
 
-            if ( !in_array($getExt, array('jpeg','jpg','png','pdf','xls','xlsm','xlsx','docx'))){
+            if ( !in_array($getExt, array('jpeg','jpg','png','pdf','xls','xlsm','xlsx','docx','pptx'))){
                
                toastr()->error('Invalid file format');
                return $this->redirect_to;

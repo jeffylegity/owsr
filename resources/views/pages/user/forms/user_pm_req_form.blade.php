@@ -147,7 +147,7 @@
                   </div>
               </div>
               <div class="form-group">
-                <label for="emailAddress">Attach file <p style="color:red;">(Supported files: docx, jpg, jpeg, png, pdf, xls, xlsm, xlsx)</p> </label>
+                <label for="emailAddress">Attach file <p style="color:red;">(Supported files: docx, jpg, jpeg, png, pdf, xls, xlsm, xlsx, pptx)</p> </label>
                 <input type="file" class="dropify" data-height="150" / name="attached_file">
               </div>
               <div class="form-group text-right m-b-0">
