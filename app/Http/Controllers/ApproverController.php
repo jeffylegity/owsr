@@ -31,25 +31,23 @@ class ApproverController extends Controller
    }
 
    public function approverApproved(){
-      $approved_requests = DB::table('requests')->select('*')->leftJoin('users','requests.requestor', '=', 'users.id')->where(['route_to_supervisor'=> Auth::user()->name,'supervisor_approval'=>1])->get();
-      return view('pages.approver.approver_approved_req')->with(['approved_req' => $approved_requests]);
+      return view('pages.approver.approver_approved_req')
+         ->with(approverParameters());
    }
 
-
-   //approver to request
    public function approverPendingForApproval(){
-      $for_approval = DB::table('requests')->select('*')->leftJoin('users','requests.requestor', '=', 'users.id')->whereIn('requestor',[Auth::id()])->whereIn('request_status',['pending to manager'])->get();
-      return view('pages.approver.approver_pending_approval')->with(['for_approval'=>$for_approval]);
+      return view('pages.approver.approver_pending_approval')
+         ->with(approverParameters());
    }
 
    public function approverPendingRequest(){
-      $pending = DB::table('requests')->select('*')->leftJoin('users','requests.requestor', '=', 'users.id')->whereIn('requestor',[Auth::id()])->whereIn('request_status',['pending'])->get();
-      return view('pages.approver.approver_pending_request')->with(['pending_request'=>$pending]);
+      return view('pages.approver.approver_pending_request')
+         ->with(approverParameters());
    }
 
    public function approverCompletedRequest(){
-      $completed = DB::table('requests')->select('*')->leftJoin('users','requests.requestor', '=', 'users.id')->whereIn('requestor',[Auth::id()])->whereIn('request_status',['completed'])->get();
-      return view('pages.approver.approver_completed_request')->with(['completed'=>$completed]);
+      return view('pages.approver.approver_completed_request')
+         ->with(approverParameters());
    }
 
    public function approverEEreqForm()

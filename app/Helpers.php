@@ -3,7 +3,62 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Charts\ManagerBarChart;
 use App\Charts\ManagerPieChart;
+use Prophecy\Exception\Doubler\ReturnByReferenceException;
 
+//Admin Helpers
+function adminParameters(){
+   $array = array(
+      'pending_counter'     =>getAdminPendingCounter(),
+      'ongoing_counter'     =>getAdminOngoingCounter(),
+      'completed_counter'   =>getAdminCompletedCounter(),
+      'pending_requests'    =>getAdminPendingRequests(),
+   );
+   return $array;
+}
+
+function getAdminPendingCounter(){
+   $pending_counter = DB::table('requests')->select('*')
+      ->where([
+         'request_to'         =>Auth::user()->department,
+         'plant_designation'  =>Auth::user()->division,
+         'request_status'     =>'pending',
+         ])
+      ->count();
+   return $pending_counter;
+}
+
+function getAdminOngoingCounter(){
+   $ongoing_counter = DB::table('requests')->select('*')
+      ->where([
+         'request_to'         =>Auth::user()->department,
+         'plant_designation'  =>Auth::user()->division,
+         'request_status'     =>'ongoing',
+         ])
+      ->count();
+   return $ongoing_counter;
+}
+
+function getAdminCompletedCounter(){
+   $completed_counter = DB::table('requests')->select('*')
+      ->where([
+         'request_to'         =>Auth::user()->department,
+         'plant_designation'  =>Auth::user()->division,
+         'request_status'     =>'completed'
+         ])
+      ->count();
+   return $completed_counter;
+}
+
+function getAdminPendingRequests(){
+   $pending_requests = DB::table('requests')->select('*')
+      ->where([
+         'request_to'         =>Auth::user()->department,
+         'plant_designation'  =>Auth::user()->division,
+         'request_status'     =>'pending',
+      ])
+      ->get();
+   return $pending_requests;
+}
 
 //Manager Helpers
 function getManagerForApproval(){
@@ -65,21 +120,29 @@ function managerMonthlyActivity(){
    $monthlyActivity = new ManagerBarChart;
    $monthlyActivity->height(0);
    $monthlyActivity->width(0);
-   $jan = DB::table('requests')->select('*')->whereMonth('date_requested','=','01')->whereYear('date_requested','=',date('Y'))->count();
-   $feb = DB::table('requests')->select('*')->whereMonth('date_requested','=','02')->whereYear('date_requested','=',date('Y'))->count();
-   $mar = DB::table('requests')->select('*')->whereMonth('date_requested','=','03')->whereYear('date_requested','=',date('Y'))->count();
-   $apr = DB::table('requests')->select('*')->whereMonth('date_requested','=','04')->whereYear('date_requested','=',date('Y'))->count();
-   $may = DB::table('requests')->select('*')->whereMonth('date_requested','=','05')->whereYear('date_requested','=',date('Y'))->count();
-   $jun = DB::table('requests')->select('*')->whereMonth('date_requested','=','06')->whereYear('date_requested','=',date('Y'))->count();
-   $jul = DB::table('requests')->select('*')->whereMonth('date_requested','=','07')->whereYear('date_requested','=',date('Y'))->count();
-   $aug = DB::table('requests')->select('*')->whereMonth('date_requested','=','08')->whereYear('date_requested','=',date('Y'))->count();
-   $sep = DB::table('requests')->select('*')->whereMonth('date_requested','=','09')->whereYear('date_requested','=',date('Y'))->count();
-   $oct = DB::table('requests')->select('*')->whereMonth('date_requested','=','10')->whereYear('date_requested','=',date('Y'))->count();
-   $nov = DB::table('requests')->select('*')->whereMonth('date_requested','=','11')->whereYear('date_requested','=',date('Y'))->count();
-   $dec = DB::table('requests')->select('*')->whereMonth('date_requested','=','12')->whereYear('date_requested','=',date('Y'))->count();
-   $monthlyActivity->labels(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec',]);
-   $monthy_data = $monthlyActivity->dataset('All requests per month', 'bar', array($jan,$feb,$mar,$apr,$may,$jun,$jul,$aug,$sep,$oct,$nov,$dec));
-   $monthy_data->backgroundColor(collect(['#01939e','#034ea2','#01939e','#034ea2','#01939e','#034ea2','#01939e','#034ea2','#01939e','#034ea2','#01939e','#034ea2',]));
+   $main = DB::table('requests')->select('*')
+      ->where([
+         'plant_designation'  =>'MAIN PLANT',
+         'request_status'     =>'PENDING',
+         'request_to'         =>Auth::user()->department,
+      ])->count();
+   $plant7 = DB::table('requests')->select('*')
+      ->where([
+         'plant_designation'  =>'PLANT 7',
+         'request_status'     =>'PENDING',
+         'request_to'         =>Auth::user()->department,
+      ])->count();
+   $plant8 = DB::table('requests')->select('*')
+      ->where([
+         'plant_designation'  =>'PLANT 8/9/10',
+         'request_status'     =>'PENDING',
+         'request_to'         =>Auth::user()->department,
+      ])->count();
+
+   // array($main,$plant7,$plant8)
+   $monthlyActivity->labels(['Main Plant','Plant 7','Plant 8']);
+   $monthy_data = $monthlyActivity->dataset('All Pending Requests per Plant', 'bar', array(14,2,10));
+   $monthy_data->backgroundColor(collect(['#f9c851','#f9c851','#f9c851']));
    return $monthlyActivity;
 }
 
@@ -101,59 +164,148 @@ function managerTaskOverview(){
    return $taskOverview;
 }
 
-
-//Admin Helpers
-function adminParameters(){
+//Approver Helpers
+function approverParameters(){
    $array = array(
-      'pending_counter'    =>getAdminPendingCounter(),
-      'ongoing_counter'    =>getAdminOngoingCounter(),
-      'completed_counter'  =>getAdminCompletedCounter(),
+      'for_approval_counter'     =>getApproverPendingForApprovalCounter(),
+      'pending_request_counter'  =>getApproverPendingForApprovalRequestsCounter(),
+      'pending_counter'          =>getApproverPendingRequestsCounter(),
+      'for_approval_requests'    =>getApproverPendingForApproval(),
+      'approved_req'             =>getApproverApprovedRequests(),
+      'for_approval'             =>getApproverPendingForApprovalRequests(),
+      'pending_request'          =>getApproverPendingRequests(),
+      'completed'                =>getApproverCompletedRequests(),
    );
    return $array;
 }
 
-function getAdminPendingCounter(){
-   $pending_counter = DB::table('requests')->select('*')
-      ->where([
-         'request_to'         =>Auth::user()->department,
-         'plant_designation'  =>Auth::user()->division,
-         'request_status'     =>'pending',
-         ])
+function getApproverPendingForApprovalCounter(){
+   $for_approval_counter = DB::table('requests')->select('*')
+      ->leftJoin('users','requests.requestor', '=', 'users.id')
+      ->where(['route_to_supervisor'=> Auth::user()->name,'request_status'=>'pending to supervisor'])
       ->count();
-   return $pending_counter;
+   return $for_approval_counter;
 }
 
-function getAdminOngoingCounter(){
-   $ongoing_counter = DB::table('requests')->select('*')
-      ->where([
-         'request_to'         =>Auth::user()->department,
-         'plant_designation'  =>Auth::user()->division,
-         'request_status'     =>'ongoing',
-         ])
+function getApproverPendingForApprovalRequestsCounter(){
+   $for_approval_requests_counter = DB::table('requests')->select('*')
+      ->leftJoin('users','requests.requestor', '=', 'users.id')
+      ->whereIn('requestor',[Auth::id()])
+      ->whereIn('request_status',['pending to manager'])
       ->count();
-   return $ongoing_counter;
+   return $for_approval_requests_counter;
 }
 
-function getAdminCompletedCounter(){
-   $completed_counter = DB::table('requests')->select('*')
-      ->where([
-         'request_to'         =>Auth::user()->department,
-         'plant_designation'  =>Auth::user()->division,
-         'request_status'     =>'completed'
-         ])
+function getApproverPendingRequestsCounter(){
+   $pending_requests_counter = DB::table('requests')->select('*')
+      ->leftJoin('users','requests.requestor', '=', 'users.id')
+      ->whereIn('requestor',[Auth::id()])
+      ->whereIn('request_status',['pending'])
       ->count();
-   return $completed_counter;
+   return $pending_requests_counter;
 }
 
-function getAdminPendingRequests(){
+function getApproverPendingForApproval(){
+   $for_approval = DB::table('requests')->select('*')
+      ->leftJoin('users','requests.requestor', '=', 'users.id')
+      ->where(['route_to_supervisor'=> Auth::user()->name,'request_status'=>'pending to supervisor'])
+      ->get();
+   return $for_approval;
+}
+
+function getApproverApprovedRequests(){
+   $approved_requests = DB::table('requests')->select('*')
+      ->leftJoin('users','requests.requestor', '=', 'users.id')
+      ->where(['route_to_supervisor'=> Auth::user()->name,'supervisor_approval'=>1])
+      ->get();
+   return $approved_requests;
+}
+
+function getApproverPendingForApprovalRequests(){
+   $for_approval_requests = DB::table('requests')->select('*')
+      ->leftJoin('users','requests.requestor', '=', 'users.id')
+      ->whereIn('requestor',[Auth::id()])
+      ->whereIn('request_status',['pending to manager'])
+      ->get();
+   return $for_approval_requests;
+}
+
+function getApproverPendingRequests(){
    $pending_requests = DB::table('requests')->select('*')
-      ->where([
-         'request_to'         =>Auth::user()->department,
-         'plant_designation'  =>Auth::user()->division,
-         'request_status'     =>'pending',
-      ])
+      ->leftJoin('users','requests.requestor', '=', 'users.id')
+      ->whereIn('requestor',[Auth::id()])
+      ->whereIn('request_status',['pending'])
       ->get();
    return $pending_requests;
 }
 
+function getApproverCompletedRequests(){
+   $completed_requests = DB::table('requests')->select('*')
+      ->leftJoin('users','requests.requestor', '=', 'users.id')
+      ->whereIn('requestor',[Auth::id()])
+      ->whereIn('request_status',['completed'])
+      ->get();
+   return $completed_requests;
+}
+
+//User Helpers
+function userParameters(){
+   $array = array(
+      'completed'                      =>getUserCompletedRequests(),
+      'pending'                        =>getUserPendingRequests(),
+      'pending_for_approval_counter'   =>getUserPendingForApprovalCounter(),
+      'pending_counter'                =>getUserPendingRequestCounter(),
+   );
+   return $array;
+}
+
+function getUserPendingRequests(){
+   $pending_requests = DB::table('requests')->select('*')
+      ->where([
+         'requestor'=>Auth::id(),
+         'request_status'=>'pending'
+      ])->get();
+   return $pending_requests;
+}
+
+function getUserCompletedRequests(){
+   $completed  = DB::table('requests')->select('*')
+      ->where([
+         'requestor'=>Auth::id(),
+         'request_status'=>'completed'
+      ])->get();
+   return $completed;
+}
+
+function getUserPendingForApprovalCounter(){
+   $pending_approval_counter = DB::table('requests')->select('*')
+      ->whereIn(
+         'request_status',['pending to supervisor','pending to manager'
+      ])->count();
+   return $pending_approval_counter;
+}
+
+function getUserPendingRequestCounter(){
+   $pending_request_counter = DB::table('requests')->select('*')
+      ->where([
+         'requestor'       =>Auth::id(),
+         'request_status'  =>'pending'
+      ])->count();
+   return $pending_request_counter;
+}
+
+function getUserRequestDetails($req_id){
+   $get_req_details = DB::table('requests')->select('*')
+      ->where([
+         'request_id'=> $req_id
+      ])->get();
+   $array = array(
+      'get_req_details'                =>$get_req_details,
+      'completed'                      =>getUserCompletedRequests(),
+      'pending'                        =>getUserPendingRequests(),
+      'pending_counter'                =>getUserPendingRequestCounter(),
+      'pending_for_approval_counter'   =>getUserPendingForApprovalCounter(),
+   );
+   return $array;
+}
 

@@ -28,7 +28,7 @@ class HomeController extends Controller
      */
     public function userHome()
     {
-      return view('pages.user.user_home');
+      return view('pages.user.user_home')->with(userParameters());
     }
     /**
      * Show the application dashboard.
@@ -37,9 +37,9 @@ class HomeController extends Controller
      */
     public function approverHome()
     {
-      $for_approval = DB::table('requests')->select('*')->leftJoin('users','requests.requestor', '=', 'users.id')->where(['route_to_supervisor'=> Auth::user()->name,'request_status'=>'pending to supervisor'])->get();
+     
       return view('pages.approver.approver_home')
-         ->with(['for_approval_requests' => $for_approval]);
+         ->with(approverParameters());
     }
 
     public function managerHome()

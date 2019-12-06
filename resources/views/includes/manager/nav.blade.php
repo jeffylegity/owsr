@@ -56,6 +56,18 @@
                   <a href="{{route('manager.approved')}}" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Approved Request(s) </span> </a>
                </li>
             </ul>
+            <hr>
+            <ul>
+               <li>
+                  <a href="#" class="waves-effect" ><i class="mdi mdi-account-alert"></i>
+                     @if (Auth::user()->department == "PLANT MAINTENANCE")
+                         <span>Pending to PM</span>
+                     @elseif(Auth::user()->department == 'EQUIPMENT ENGINEERING')
+                         <span>Pending to EE</span>
+                     @endif 
+                  </a>
+               </li>
+            </ul>
             <div class="clearfix"></div>
          </div>
          <div class="clearfix"></div>

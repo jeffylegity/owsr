@@ -12,22 +12,13 @@ class UserController extends Controller
 
    public function userPendingReq()
    {
-      $pending   = DB::table('requests')->select('*')->where(['requestor'=>Auth::id(),'request_status'=>'pending'])->get();
-      $parameters    = array(
-         'pending'        => $pending, 
-      );
-      return view('pages.user.user_pending')->with($parameters);
+      return view('pages.user.user_pending')->with(userParameters());
    }
 
    public function userCompletedReq()
    {
-      $completed   = DB::table('requests')->select('*')->where(['requestor'=>Auth::id(),'request_status'=>'completed'])->get();
-      $parameters    = array(
-         'completed'        => $completed, 
-      );
-      return view('pages.user.user_completed')->with($parameters);
+      return view('pages.user.user_completed')->with(userParameters());
    }
-
 
    public function userEEreqForm()
    {
@@ -70,8 +61,7 @@ class UserController extends Controller
 
    public function userReqDetails($req_id)
    {
-      $get_req_details = DB::table('requests')->select('*')->where(['request_id'=> $req_id])->get();
-      return view('pages.user.forms.user_req_details')->with(['get_request_details'=>$get_req_details]);
+      return view('pages.user.forms.user_req_details')->with(getUserRequestDetails($req_id));
    }
 
 }

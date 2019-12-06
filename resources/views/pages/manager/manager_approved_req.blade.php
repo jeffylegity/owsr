@@ -28,7 +28,13 @@
                         <td>{{$request->request_id}}</td>
                         <td>{{$request->request_to}}</td>
                         <td title="{{$request->request_concern}}">{{Str::limit($request->request_concern,30)}}</td>
-                        <td><span class="badge badge-danger">{{$request->request_status}} to {{strtolower($request->request_to)}}</span></td>
+                        <td>
+                           @if ($request->request_status == 'pending')
+                              <span class="badge badge-danger">{{$request->request_status}} to {{strtolower($request->request_to)}}</span>
+                           @elseif($request->request_status == 'completed')
+                              <span class="badge badge-success">{{$request->request_status}} by {{strtolower($request->request_to)}}</span>
+                           @endif
+                        </td>
                         <td>{{ Carbon\Carbon::parse($request->date_requested)->diffForHumans()}}</td>
                      </tr>
                      @endforeach

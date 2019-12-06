@@ -7,7 +7,7 @@
             <div class="col-xl-4 col-md-6">
               <div class="card-box">
                 <div class="dropdown pull-right">
-                  <a href="/pending_requests" class="btn btn-sm" style="background-color:#01939e;color:white;">
+                  <a href="{{route('admin.pending_requests')}}" class="btn btn-sm" style="background-color:#01939e;color:white;">
                       <i class="mdi mdi-eye"></i>View
                   </a>
                 </div>
@@ -32,12 +32,9 @@
             <div class="col-xl-4 col-md-6">
               <div class="card-box">
                 <div class="dropdown pull-right">
-                  <a href="/ongoing_requests" class="btn btn-sm" style="background-color:#01939e;color:white;">
+                  <a href="" class="btn btn-sm" style="background-color:#01939e;color:white;">
                       <i class="mdi mdi-eye"></i>View
                   </a>
-                  <div class="dropdown-menu dropdown-menu-right">
-                      <a href="javascript:void(0);" class="dropdown-item">View</a>
-                  </div>
                 </div>
                 <h4 class="header-title mt-0 m-b-30">
                    Ongoing task(s)

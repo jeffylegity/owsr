@@ -76,13 +76,16 @@
                </li>
                <li>
                   <a href="{{route('admin.pending_requests')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Pending Request(s) </span> 
-                     {{-- @if (!$for_approval_counter == 0)
-                        <span class="badge badge-danger" style="float:right;">{{$for_approval_counter}}</span>  
-                     @endif --}}
+                     @if (!$pending_counter == 0)
+                        <span class="badge badge-danger" style="float:right;">{{$pending_counter}}</span>  
+                     @endif
                   </a>
                </li>
                <li>
-                  <a href="{{route('manager.approved')}}" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Completed Request(s) </span> </a>
+                  <a href="#" class="waves-effect" ><i class="mdi mdi-settings"></i> <span> Ongoing Request(s) </span></a>
+               </li>
+               <li>
+                  <a href="#" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Completed Request(s) </span></a>
                </li>
             </ul>
             <div class="clearfix"></div>

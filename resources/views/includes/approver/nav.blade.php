@@ -43,17 +43,29 @@
          <div id="sidebar-menu">
             <ul>
                <li>
-                  <a href="{{route('approver.home')}}" class="waves-effect" ><i class="mdi mdi-clipboard-alert"></i> <span> Approval Request(s) </span> </a>
+                  <a href="{{route('approver.home')}}" class="waves-effect" ><i class="mdi mdi-clipboard-alert"></i> <span> Approval Request(s) </span> 
+                     @if (!$for_approval_counter == 0)
+                        <span class="badge badge-danger" style="float:right;">{{$for_approval_counter}}</span>   
+                     @endif
+                  </a>
                </li>
                <li>
                   <a href="{{route('approver.approved')}}" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Approved Request(s) </span> </a>
                </li>
                <hr>
                <li>
-                  <a href="{{route('approver.pending_for_approval')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Pending for Approval </span> </a>
+                  <a href="{{route('approver.pending_for_approval')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Pending for Approval </span> 
+                     @if (!$pending_request_counter == 0)
+                         <span class="badge badge-danger" style="float:right;">{{$pending_request_counter}}</span>
+                     @endif
+                  </a>
                </li>
                <li>
-                  <a href="{{route('approver.pending_request')}}" class="waves-effect" ><i class="mdi mdi-account-alert"></i> <span> Pending Request(s)</span> </a>
+                  <a href="{{route('approver.pending_request')}}" class="waves-effect" ><i class="mdi mdi-account-alert"></i> <span> Pending Request(s)</span> 
+                     @if (!$pending_counter == 0)
+                         <span class="badge badge-danger" style="float:right;">{{$pending_counter}}</span>
+                     @endif
+                  </a>
                </li>
                <li>
                   <a href="{{route('approver.completed_request')}}" class="waves-effect" ><i class="mdi mdi-clipboard-check"></i> <span> Completed Request(s)</span> </a>

@@ -7,7 +7,7 @@
         <div class="col-xl-8 offset-2">
           <div class="card-box">
             <h4 class="header-title m-t-0 m-b-30">Work Request and Troubleshooting Details</h4>
-            @foreach ($get_request_details as $request)
+            @foreach ($get_req_details as $request)
             <form>
              <hr>
              <div class="form-group">

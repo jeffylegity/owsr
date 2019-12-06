@@ -43,10 +43,18 @@
          <div id="sidebar-menu">
             <ul>
                <li>
-                  <a href="{{route('user.home')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Pending for Approval </span> </a>
+                  <a href="{{route('user.home')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Pending for Approval </span> 
+                     @if (!$pending_for_approval_counter == 0)
+                         <span class="badge badge-danger" style="float:right">{{$pending_for_approval_counter}}</span>
+                     @endif
+                  </a>
                </li>
                <li>
-                  <a href="{{route('user.pending')}}" class="waves-effect" ><i class="mdi mdi-account-alert"></i> <span> Pending Request(s)</span> </a>
+                  <a href="{{route('user.pending')}}" class="waves-effect" ><i class="mdi mdi-account-alert"></i> <span> Pending Request(s)</span> 
+                     @if (!$pending_counter == 0)
+                         <span class="badge badge-danger" style="float:right;">{{$pending_counter}}</span>
+                     @endif
+                  </a>
                </li>
                <li>
                   <a href="{{route('user.completed')}}" class="waves-effect" ><i class="mdi mdi-clipboard-check"></i> <span> Completed Request(s)</span> </a>
