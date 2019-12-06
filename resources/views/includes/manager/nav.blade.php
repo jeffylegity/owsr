@@ -59,13 +59,14 @@
             <hr>
             <ul>
                <li>
-                  <a href="#" class="waves-effect" ><i class="mdi mdi-account-alert"></i>
-                     @if (Auth::user()->department == "PLANT MAINTENANCE")
-                         <span>Pending to PM</span>
-                     @elseif(Auth::user()->department == 'EQUIPMENT ENGINEERING')
-                         <span>Pending to EE</span>
-                     @endif 
+                  <a href="{{route('manager.pending')}}" class="waves-effect" ><i class="mdi mdi-account-alert"></i> <span> Pending task(s) </span>
+                     @if (!$pending_counter == 0)
+                         <span class="badge badge-danger" style="float:right">{{$pending_counter}}</span>
+                     @endif
                   </a>
+               </li>
+               <li>
+                  <a href="{{route('manager.completed')}}" class="waves-effect" ><i class="mdi mdi-check-circle"></i> <span> Completed task(s)</span> </a>
                </li>
             </ul>
             <div class="clearfix"></div>

@@ -22,8 +22,8 @@
                   </div>
                   <div class="progress progress-bar-success-alt progress-sm mb-0">
                       <div class="progress-bar progress-bar-success" role="progressbar"
-                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                            style="width: 100%; background-color:#01939e;">
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                        style="width: 100%; background-color:#01939e;">
                       </div>
                   </div>
                 </div>
@@ -32,7 +32,7 @@
             <div class="col-xl-4 col-md-6">
               <div class="card-box">
                 <div class="dropdown pull-right">
-                  <a href="/ongoing_requests" class="btn btn-sm" style="background-color:#01939e;color:white;">
+                  <a href="{{route('manager.pending')}}" class="btn btn-sm" style="background-color:#01939e;color:white;">
                       <i class="mdi mdi-eye"></i>View
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
@@ -58,8 +58,8 @@
                   </div>
                   <div class="progress progress-bar-success-alt progress-sm mb-0">
                       <div class="progress-bar progress-bar-success" role="progressbar"
-                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                            style="width: 100%; background-color:#01939e;">
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                        style="width: 100%; background-color:#01939e;">
                       </div>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
             <div class="col-xl-4 col-md-6">
               <div class="card-box">
                 <div class="dropdown pull-right">
-                  <a href="/completed_requests" class="btn btn-sm" style="background-color:#01939e;color:white;">
+                  <a href="{{route('manager.completed')}}" class="btn btn-sm" style="background-color:#01939e;color:white;">
                       <i class="mdi mdi-eye"></i>View
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
@@ -86,8 +86,8 @@
                   </div>
                   <div class="progress progress-bar-success-alt progress-sm mb-0">
                       <div class="progress-bar progress-bar-success" role="progressbar"
-                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                            style="width: 100%; background-color:#01939e;">
+                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                        style="width: 100%; background-color:#01939e;">
                       </div>
                   </div>
                 </div>

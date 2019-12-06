@@ -49,6 +49,8 @@ Route::group(['middleware' => ['is_manager']], function () {
    Route::get('manager/home', 'HomeController@managerHome')->name('manager.home');
    Route::get('manager/pending_for_approval','ManagerController@managerPendingForApproval')->name('manager.pending_for_approval');
    Route::get('manager/approved_requests', 'ManagerController@managerApproved')->name('manager.approved');
+   Route::get('manager/pending_requests', 'ManagerController@managerPending')->name('manager.pending');
+   Route::get('manager/completed_requests', 'ManagerController@managerCompleted')->name('manager.completed');
    Route::get('manager/approve_request/{req_id}','ManagerController@approveRequest')->name('manager.approve_request');
    Route::get('manager/request_details/{req_id}', 'ManagerController@managerReqDetails')->name('manager.req_details');
 });

@@ -41,6 +41,16 @@ class ManagerController extends Controller
          ->with(managerParameters());
    }
 
+   public function managerPending(){
+      return view('pages.manager.manager_pending_req')
+         ->with(managerParameters());
+   }
+
+   public function managerCompleted(){
+      return view('pages.manager.manager_completed_req')
+         ->with(managerParameters());
+   }
+
    public function managerReqDetails($req_id){
       return view('pages.manager.forms.manager_req_details')
          ->with(['get_request_details'=>getManagerReqDetails($req_id),'for_approval_counter'=>getManagerForApprovalCounter()]);

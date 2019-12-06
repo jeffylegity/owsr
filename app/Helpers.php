@@ -98,6 +98,24 @@ function getManagerApprovedRequests(){
    return $approved_requests;
 }
 
+function getManagerPendingRequests(){
+   $pending = DB::table('requests')->select('*')
+      ->where([
+         'request_to'      =>Auth::user()->department,
+         'request_status'  =>'pending'
+      ])->get();
+   return $pending;
+}
+
+function getManagerCompletedRequests(){
+   $completed = DB::table('requests')->select('*')
+      ->where([
+         'request_to'      =>Auth::user()->department,
+         'request_status'  =>'completed',
+      ])->get();
+   return $completed;
+}
+
 function getManagerReqDetails($req_id){
    $get_req_details = DB::table('requests')->select('*')
       ->where(['request_id'=> $req_id])
@@ -111,7 +129,9 @@ function managerParameters(){
       'approved_req'          =>getManagerApprovedRequests(),
       'for_approval_counter'  =>getManagerForApprovalCounter(),
       'pending_counter'       =>getManagerPendingCounter(),
-      'completed_counter'     =>getManagerCompletedCounter()
+      'completed_counter'     =>getManagerCompletedCounter(),
+      'pending'               =>getManagerPendingRequests(),
+      'completed'             =>getManagerCompletedRequests(),
    );
    return $array;
 }
