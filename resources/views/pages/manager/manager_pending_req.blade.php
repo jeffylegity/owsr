@@ -27,7 +27,11 @@
                            <a href="{{route('manager.req_details', $request->request_id)}}" class="btn btn-primary"><i class="mdi mdi-eye"></i></a>
                         </td> 
                         <td>{{$request->request_id}}</td>
+                        @if ($request->plant_designation == 'PLANT 8/9/10')
+                        <td>PLANT 8</td>
+                        @else
                         <td>{{$request->plant_designation}}</td>
+                        @endif
                         <td>{{$request->request_to}}</td>
                         <td title="{{$request->request_concern}}">{{Str::limit($request->request_concern,30)}}</td>
                         <td><span class="badge badge-danger">{{$request->request_status}}</span></td>

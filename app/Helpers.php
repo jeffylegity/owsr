@@ -161,7 +161,7 @@ function managerMonthlyActivity(){
 
    // array($main,$plant7,$plant8)
    $monthlyActivity->labels(['Main Plant','Plant 7','Plant 8']);
-   $monthy_data = $monthlyActivity->dataset('All Pending Requests per Plant', 'bar', array(14,2,10));
+   $monthy_data = $monthlyActivity->dataset('All Pending Requests per Plant', 'bar', array($main,$plant7,$plant8));
    $monthy_data->backgroundColor(collect(['#f9c851','#f9c851','#f9c851']));
    return $monthlyActivity;
 }

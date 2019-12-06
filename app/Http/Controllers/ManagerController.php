@@ -53,6 +53,7 @@ class ManagerController extends Controller
 
    public function managerReqDetails($req_id){
       return view('pages.manager.forms.manager_req_details')
-         ->with(['get_request_details'=>getManagerReqDetails($req_id),'for_approval_counter'=>getManagerForApprovalCounter()]);
+         ->with(['get_request_details'=>getManagerReqDetails($req_id)])
+         ->with(managerParameters());
    }
 }
