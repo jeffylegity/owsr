@@ -43,49 +43,20 @@
          <div id="sidebar-menu">
             <ul>
                <li>
-                  <div class="alert alert-primary" style="background-color:#01939e;color:white;">
-                     <h3 class="header-title" style="text-align:center">
-                        @switch(Auth::user()->department)
-                              @case('PLANT MAINTENANCE')
-                              Plant Maintenance    
-                                 @break
-                              @case('EQUIPMENT ENGINEERING')
-                              Equipment Engineering
-                                 @break
-                        @endswitch
-                     </h3>
-                     <h5 class="header-title" style="text-align:center">
-                        <span class="badge badge-danger">
-                           @switch(Auth::user()->division)
-                                 @case('PLANT 8/9/10')
-                                 Plant 8
-                                    @break
-                                 @case('PLANT 7')
-                                 Plant 7
-                                    @break
-                                 @case('MAIN PLANT')
-                                 Main Plant
-                                    @break
-                           @endswitch
-                        </span>
-                     </h5>
-                  </div>
-               </li>
-               <li>
                   <a href="{{route('admin.home')}}" class="waves-effect" ><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
                </li>
                <li>
-                  <a href="{{route('admin.pending_requests')}}" class="waves-effect" ><i class="mdi mdi-comment-alert-outline"></i> <span> Pending Request(s) </span> 
+                  <a href="{{route('admin.pending_requests')}}" class="waves-effect" ><i class="mdi mdi-account-alert"></i> <span> Pending task(s) </span> 
                      @if (!$pending_counter == 0)
                         <span class="badge badge-danger" style="float:right;">{{$pending_counter}}</span>  
                      @endif
                   </a>
                </li>
                <li>
-                  <a href="#" class="waves-effect" ><i class="mdi mdi-settings"></i> <span> Ongoing Request(s) </span></a>
+                  <a href="{{route('admin.completed_request')}}" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Completed task(s) </span></a>
                </li>
                <li>
-                  <a href="#" class="waves-effect" ><i class="mdi mdi-comment-check"></i> <span> Completed Request(s) </span></a>
+                  <a href="{{route('admin.denied_request')}}" class="waves-effect" ><i class="mdi mdi-close-circle"></i> <span> Denied task(s) </span></a>
                </li>
             </ul>
             <div class="clearfix"></div>

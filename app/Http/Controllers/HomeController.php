@@ -50,7 +50,7 @@ class HomeController extends Controller
 
     public function adminHome()
     {
-        return view('pages.admin.admin_home')
+        return view('pages.admin.admin_home',['taskOverview'=>adminTaskOverview()],['monthlyActivity'=>adminMonthlyActivity()])
          ->with(adminParameters());
     }
 

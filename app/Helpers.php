@@ -3,15 +3,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Charts\ManagerBarChart;
 use App\Charts\ManagerPieChart;
+use App\Charts\AdminPieChart;
+use App\Charts\AdminBarChart;
 use Prophecy\Exception\Doubler\ReturnByReferenceException;
 
 //Admin Helpers
 function adminParameters(){
    $array = array(
       'pending_counter'     =>getAdminPendingCounter(),
-      'ongoing_counter'     =>getAdminOngoingCounter(),
       'completed_counter'   =>getAdminCompletedCounter(),
+      'denied_counter'      =>getAdminDeniedCounter(),
       'pending_requests'    =>getAdminPendingRequests(),
+      'completed_requests'  =>getAdminCompletedRequests(),
+      'denied_requests'     =>getAdminDeniedRequests(),
+
    );
    return $array;
 }
@@ -25,17 +30,6 @@ function getAdminPendingCounter(){
          ])
       ->count();
    return $pending_counter;
-}
-
-function getAdminOngoingCounter(){
-   $ongoing_counter = DB::table('requests')->select('*')
-      ->where([
-         'request_to'         =>Auth::user()->department,
-         'plant_designation'  =>Auth::user()->division,
-         'request_status'     =>'ongoing',
-         ])
-      ->count();
-   return $ongoing_counter;
 }
 
 function getAdminCompletedCounter(){
@@ -58,6 +52,152 @@ function getAdminPendingRequests(){
       ])
       ->get();
    return $pending_requests;
+}
+
+function getAdminDeniedCounter(){
+   $denied_counter = DB::table('requests')->select('*')
+      ->where([
+         'request_to'         =>Auth::user()->department,
+         'plant_designation'  =>Auth::user()->division,
+         'request_status'     =>'denied'
+      ])->count();
+   return $denied_counter;
+}
+
+function getAdminCompletedRequests(){
+   $completed_requests = DB::table('requests')->select('*')
+      ->where([
+         'request_to'         =>Auth::user()->department,
+         'plant_designation'  =>Auth::user()->division,
+         'request_status'     =>'completed',
+      ])
+      ->get();
+   return $completed_requests;
+}
+
+function getAdminDeniedRequests(){
+   $denied_requests = DB::table('requests')->select('*')
+      ->where([
+         'request_to'         =>Auth::user()->department,
+         'plant_designation'  =>Auth::user()->division,
+         'request_status'     =>'denied',
+      ])
+      ->get();
+   return $denied_requests;
+}
+
+function adminTaskOverview(){
+   $all_pending   = DB::table('requests')->select('*')
+      ->where([
+         'plant_designation'  =>Auth::user()->division,
+         'request_to'         =>Auth::user()->department,
+         'request_status'     =>'pending',
+      ])->count();
+   $all_completed   = DB::table('requests')->select('*')
+      ->where([
+         'plant_designation'  =>Auth::user()->division,
+         'request_to'         =>Auth::user()->department,
+         'request_status'     =>'completed',
+      ])->count();
+   $all_denied   = DB::table('requests')->select('*')
+      ->where([
+         'plant_designation'  =>Auth::user()->division,
+         'request_to'         =>Auth::user()->department,
+         'request_status'     =>'denied',
+      ])->count();
+   
+   $taskOverview = new AdminPieChart;
+   $taskOverview->displayAxes(false);
+   $taskOverview->height(0);
+   $taskOverview->width(0);
+   $taskOverview->labels(['Pending','Completed','Denied']);
+   $dataset = $taskOverview->dataset('Task Overview', 'doughnut', array($all_pending,$all_completed,$all_denied));
+   $dataset->backgroundColor(collect(['#ff5b5b','#10c469','#f9c851']));
+   return $taskOverview;
+}
+
+function adminMonthlyActivity(){
+   $monthlyActivity = new AdminBarChart;
+   $monthlyActivity->height(0);
+   $monthlyActivity->width(0);
+
+      $jan = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',1)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $feb = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',2)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $mar = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',3)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $apr = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',4)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $may = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',5)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $jun = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',6)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $jul = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',7)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $aug = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',8)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+      
+      $sep = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',9)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $oct = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',10)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $nov = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',11)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+      $dec = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'plant_designation'=>Auth::user()->division])
+      ->whereMonth('date_requested',12)
+      ->whereYear('date_requested',date('Y'))
+      ->count();
+
+   $monthlyActivity->labels(['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']);
+   $monthy_data = $monthlyActivity->dataset('Task(s) recieved monthly', 'bar', array($jan,$feb,$mar,$apr,$may,$jun,$jul,$aug,$sep,$oct,$nov,$dec));
+   $monthy_data->backgroundColor(collect(['#01939e','#01939e','#01939e','#01939e','#01939e','#01939e','#01939e','#01939e','#01939e','#01939e','#01939e','#01939e']));
+   return $monthlyActivity;
+
 }
 
 //Manager Helpers
@@ -143,19 +283,19 @@ function managerMonthlyActivity(){
    $main = DB::table('requests')->select('*')
       ->where([
          'plant_designation'  =>'MAIN PLANT',
-         'request_status'     =>'PENDING',
+         'request_status'     =>'pending',
          'request_to'         =>Auth::user()->department,
       ])->count();
    $plant7 = DB::table('requests')->select('*')
       ->where([
          'plant_designation'  =>'PLANT 7',
-         'request_status'     =>'PENDING',
+         'request_status'     =>'pending',
          'request_to'         =>Auth::user()->department,
       ])->count();
    $plant8 = DB::table('requests')->select('*')
       ->where([
          'plant_designation'  =>'PLANT 8/9/10',
-         'request_status'     =>'PENDING',
+         'request_status'     =>'pending',
          'request_to'         =>Auth::user()->department,
       ])->count();
 
@@ -173,14 +313,17 @@ function managerTaskOverview(){
    $all_completed = DB::table('requests')->select('*')
       ->where(['request_to'=>Auth::user()->department,'request_status'=>'completed'])
       ->count();
+   $all_denied = DB::table('requests')->select('*')
+      ->where(['request_to'=>Auth::user()->department,'request_status'=>'denied'])
+      ->count();
    
    $taskOverview = new ManagerPieChart;
    $taskOverview->displayAxes(false);
    $taskOverview->height(0);
    $taskOverview->width(0);
-   $taskOverview->labels(['Pending','Completed']);
-   $dataset = $taskOverview->dataset('Task Overview', 'doughnut', array($all_pending,$all_completed));
-   $dataset->backgroundColor(collect(['#f9c851','#10c469']));
+   $taskOverview->labels(['Pending','Completed','Denied']);
+   $dataset = $taskOverview->dataset('Task Overview', 'doughnut', array($all_pending,$all_completed,$denied));
+   $dataset->backgroundColor(collect(['#ff5b5b','#10c469','#f9c851']));
    return $taskOverview;
 }
 

@@ -25,6 +25,11 @@ Auth::routes([
 Route::group(['middleware' => ['is_admin']], function () {
    Route::get('admin/home', 'HomeController@adminHome')->name('admin.home');
    Route::get('admin/pending_requests', 'AdminController@adminPendingRequests')->name('admin.pending_requests');
+   Route::get('admin/completed_request', 'AdminController@adminCompletedRequest')->name('admin.completed_request');
+   Route::get('admin/denied_request', 'AdminController@adminDeniedRequest')->name('admin.denied_request');
+   Route::get('admin/complete_request/{req_id}','AdminController@adminCompleteRequest')->name('admin.complete_request');
+   Route::get('admin/request_details/{req_id}','AdminController@adminReqDetails')->name('admin.req_details');
+
 });
 
 //role == 2
@@ -39,7 +44,7 @@ Route::group(['middleware' => ['is_approver']], function () {
    Route::get('approver/pm_request_form', 'ApproverController@approverPMreqForm')->name('approver.pm_req_form');
    Route::get('approver/pe_request_form', 'ApproverController@approverPEreqForm')->name('approver.pe_req_form');
    Route::get('approver/approve_request/{req_id}','ApproverController@approveRequest')->name('approver.approve_request');
-   Route::get('approver/view_request_details/{req_id}','ApproverController@approverReqDetails')->name('approver.req_details');
+   Route::get('approver/request_details/{req_id}','ApproverController@approverReqDetails')->name('approver.req_details');
    Route::post('approver/submit_request_form', 'ApproverFormController@approverSubmitReqForm')->name('approver.submit_request_form');
 });
 

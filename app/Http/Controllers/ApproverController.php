@@ -49,6 +49,12 @@ class ApproverController extends Controller
       return view('pages.approver.approver_completed_request')
          ->with(approverParameters());
    }
+   
+   public function approverReqDetails($req_id)
+   {
+      $get_req_details = DB::table('requests')->select('*')->where(['request_id'=> $req_id])->get();
+      return view('pages.approver.forms.approver_req_details')->with(['get_request_details'=>$get_req_details])->with(approverParameters());
+   }
 
    public function approverEEreqForm()
    {
@@ -83,9 +89,5 @@ class ApproverController extends Controller
       ]);
    }
 
-   public function approverReqDetails($req_id)
-   {
-      $get_req_details = DB::table('requests')->select('*')->where(['request_id'=> $req_id])->get();
-      return view('pages.approver.forms.approver_req_details')->with(['get_request_details'=>$get_req_details]);
-   }
+
 }
