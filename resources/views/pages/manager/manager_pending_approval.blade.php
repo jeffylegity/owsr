@@ -24,10 +24,10 @@
                      @foreach ($for_approval as $request)
                       <tr style="text-align:center;">
                         <td>
-                           <a href="{{route('manager.req_details', $request->request_id)}}" class="btn btn-primary"><i class="mdi mdi-eye"></i></a>
+                           <a href="{{route('manager.req_details', $request->request_id)}}" class="btn btn-primary btn-sm"><i class="mdi mdi-eye"></i></a>
                         </td>
                         <td>
-                           <a href="{{route('manager.approve_request', $request->request_id)}}" class="btn btn-success"><i class="mdi mdi-check"></i></a>
+                           <a href="{{route('manager.approve_request', $request->request_id)}}" class="btn btn-success btn-sm"><i class="mdi mdi-check"></i></a>
                         </td>
                         <td>{{$request->request_id}}</td>
                         <td>{{$request->request_to}}</td>

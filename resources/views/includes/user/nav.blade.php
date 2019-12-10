@@ -64,7 +64,7 @@
                   <ul class="list-unstyled">
                      <li><a href="{{route('user.ee_req_form')}}">Equipment Engineering</a></li>
                      <li><a href="{{route('user.pm_req_form')}}">Plant Maintenance</a></li>
-                     <li><a href="{{route('user.pe_req_form')}}">Process Engineering</a></li>
+                     {{-- <li><a href="{{route('user.pe_req_form')}}">Process Engineering</a></li> --}}
                   </ul>
                </li>
             </ul>

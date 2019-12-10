@@ -302,7 +302,7 @@ function managerMonthlyActivity(){
    // array($main,$plant7,$plant8)
    $monthlyActivity->labels(['Main Plant','Plant 7','Plant 8']);
    $monthy_data = $monthlyActivity->dataset('All Pending Requests per Plant', 'bar', array($main,$plant7,$plant8));
-   $monthy_data->backgroundColor(collect(['#f9c851','#f9c851','#f9c851']));
+   $monthy_data->backgroundColor(collect(['#ff5b5b','#ff5b5b','#ff5b5b']));
    return $monthlyActivity;
 }
 
@@ -322,7 +322,7 @@ function managerTaskOverview(){
    $taskOverview->height(0);
    $taskOverview->width(0);
    $taskOverview->labels(['Pending','Completed','Denied']);
-   $dataset = $taskOverview->dataset('Task Overview', 'doughnut', array($all_pending,$all_completed,$denied));
+   $dataset = $taskOverview->dataset('Task Overview', 'doughnut', array($all_pending,$all_completed,$all_denied));
    $dataset->backgroundColor(collect(['#ff5b5b','#10c469','#f9c851']));
    return $taskOverview;
 }

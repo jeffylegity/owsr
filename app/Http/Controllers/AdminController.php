@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 
 use Illuminate\Http\Request;
-
+ 
 class AdminController extends Controller
 {
    public function adminPendingRequests(){
@@ -49,5 +49,31 @@ class AdminController extends Controller
       }
    }
 
+   public function adminDenyRequest(Request $request){
+
+      $req_id        = $request->input('req_id');
+      $input_form    = $request->input('denyTask');
+
+      $deny_request  = DB::table('requests')->select('*')
+         ->where([
+            'request_id'   =>$req_id
+         ])
+         ->update([
+            'remarks'         =>$input_form,
+            'request_status'  =>'denied',
+         ]);
+
+      if (!$deny_request) {
+
+         toastr()->error('An error occurred, please contact your administrator');
+         return redirect()->route('admin.pending_requests');
+
+      } else {
+
+         toastr()->error('Task denied');
+         return redirect()->route('admin.pending_requests');
+
+      }
+   }
 
 }

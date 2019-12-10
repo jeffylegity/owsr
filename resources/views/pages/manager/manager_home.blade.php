@@ -7,7 +7,7 @@
             <div class="col-xl-3 col-md-6">
               <div class="card-box">
                 <div class="dropdown pull-right">
-                  <a href="/pending_requests" class="btn btn-sm" style="background-color:#01939e;color:white;">
+                  <a href="{{route('manager.pending_for_approval')}}" class="btn btn-sm" style="background-color:#01939e;color:white;">
                       <i class="mdi mdi-eye"></i>View
                   </a>
                 </div>

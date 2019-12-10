@@ -30,7 +30,7 @@ class UserController extends Controller
          'get_all_supervisor' => $get_all_supervisor,
          'get_all_department' => $get_all_department,
       );
-      return view('pages.user.forms.user_ee_req_form')->with($parameters);
+      return view('pages.user.forms.user_ee_req_form')->with($parameters)->with(userParameters());
    }
 
    public function userPMreqForm()
@@ -43,7 +43,7 @@ class UserController extends Controller
          'get_all_supervisor' => $get_all_supervisor,
          'get_all_department' => $get_all_department,
       );
-      return view('pages.user.forms.user_pm_req_form')->with($parameters);
+      return view('pages.user.forms.user_pm_req_form')->with($parameters)->with(userParameters());
    }
 
    public function userPEreqForm()
@@ -56,7 +56,7 @@ class UserController extends Controller
          'get_all_supervisor' => $get_all_supervisor,
          'get_all_department' => $get_all_department,
       );
-      return view('pages.user.forms.user_pm_req_form')->with($parameters);
+      return view('pages.user.forms.user_pm_req_form')->with($parameters)->with(userParameters());
    }
 
    public function userReqDetails($req_id)

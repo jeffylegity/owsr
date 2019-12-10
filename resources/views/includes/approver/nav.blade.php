@@ -75,7 +75,7 @@
                   <ul class="list-unstyled">
                      <li><a href="{{route('approver.ee_req_form')}}">Equipment Engineering</a></li>
                      <li><a href="{{route('approver.pm_req_form')}}">Plant Maintenance</a></li>
-                     <li><a href="{{route('approver.pe_req_form')}}">Process Engineering</a></li>
+                     {{-- <li><a href="{{route('approver.pe_req_form')}}">Process Engineering</a></li> --}}
                   </ul>
                </li>
             </ul>

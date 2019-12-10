@@ -25,7 +25,7 @@
                          @foreach ($pending as $requests)
                            <tr style="text-align:center;">
                               <td>
-                                 <a href="{{route('user.req_details',$requests->request_id)}}" class="btn btn-primary">
+                                 <a href="{{route('user.req_details',$requests->request_id)}}" class="btn btn-primary btn-sm">
                                     <i class="mdi mdi-eye"></i>
                                  </a>
                               </td>

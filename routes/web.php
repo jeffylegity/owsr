@@ -29,6 +29,7 @@ Route::group(['middleware' => ['is_admin']], function () {
    Route::get('admin/denied_request', 'AdminController@adminDeniedRequest')->name('admin.denied_request');
    Route::get('admin/complete_request/{req_id}','AdminController@adminCompleteRequest')->name('admin.complete_request');
    Route::get('admin/request_details/{req_id}','AdminController@adminReqDetails')->name('admin.req_details');
+   Route::post('admin/deny_request', 'AdminController@adminDenyRequest')->name('admin.deny_request');
 
 });
 

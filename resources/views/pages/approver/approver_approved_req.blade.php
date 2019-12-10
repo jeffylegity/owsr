@@ -23,7 +23,7 @@
                      @foreach ($approved_req as $request)
                       <tr style="text-align:center;">
                         <td>
-                           <a href="{{route('approver.req_details', $request->request_id)}}" class="btn btn-primary"><i class="mdi mdi-eye"></i></a>
+                           <a href="{{route('approver.req_details', $request->request_id)}}" class="btn btn-primary btn-sm"><i class="mdi mdi-eye"></i></a>
                         </td>
                         <td>{{$request->request_id}}</td>
                         <td>{{$request->name}}</td>
